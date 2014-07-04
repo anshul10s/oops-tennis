@@ -12,23 +12,25 @@ public class TennisTest {
     
     @Before
     public void setup() {
-        tennisGame = new TennisGameImpl(SHARAPOVA, TENDUKLAR);
+        tennisGame = new TennisGameImpl(TENDUKLAR, SHARAPOVA);
     }
     
     @Test
     public void SHscorePoint() {
         tennisGame.wonPoint(SHARAPOVA);
-        assertEquals("Fifteen-Love", tennisGame.getScore());
+        assertEquals("Love-Fifteen", tennisGame.getScore());
     }
     
     @Test
     public void TDScorePoint() {
         tennisGame.wonPoint(TENDUKLAR);
-        assertEquals("Love-Fifteen", tennisGame.getScore());
+        assertEquals("Fifteen-Love", tennisGame.getScore());
     }
     
     @Test
     public void TD1SH2ScorePoint() {
+        tennisGame.wonPoint(SHARAPOVA);
+        tennisGame.wonPoint(SHARAPOVA);
         tennisGame.wonPoint(TENDUKLAR);
         assertEquals("Fifteen-Thirty", tennisGame.getScore());
     }
@@ -36,10 +38,9 @@ public class TennisTest {
     @Test
     public void TD2SH1corePoint() {
         tennisGame.wonPoint(TENDUKLAR);
+        tennisGame.wonPoint(TENDUKLAR);
+        tennisGame.wonPoint(SHARAPOVA);
         assertEquals("Thirty-Fifteen", tennisGame.getScore());
     }
     
-    
-
-
 }
