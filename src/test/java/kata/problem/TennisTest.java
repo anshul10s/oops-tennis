@@ -4,6 +4,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Level2:
+ * 
+ * Implement more scores now
+ * @author anshul.gupta
+ *
+ */
 public class TennisTest {
 
     private static final String TENDUKLAR = "Tenduklar";
@@ -42,5 +49,38 @@ public class TennisTest {
         tennisGame.wonPoint(SHARAPOVA);
         assertEquals("Thirty-Fifteen", tennisGame.getScore());
     }
+    
+    @Test
+    public void TD2SH0ScorePoint() {
+        tennisGame.wonPoint(TENDUKLAR);
+        tennisGame.wonPoint(TENDUKLAR);
+        assertEquals("Thirty-Love", tennisGame.getScore());
+    }
+    
+    @Test
+    public void TD0SH2ScorePoint() {
+        tennisGame.wonPoint(SHARAPOVA);
+        tennisGame.wonPoint(SHARAPOVA);
+        assertEquals("Love-Thirty", tennisGame.getScore());
+    }
+    
+    @Test
+    public void TD3SH1ScorePoint() {
+        tennisGame.wonPoint(TENDUKLAR);
+        tennisGame.wonPoint(TENDUKLAR);
+        tennisGame.wonPoint(TENDUKLAR);
+        tennisGame.wonPoint(SHARAPOVA);
+        assertEquals("Forty-Fifteen", tennisGame.getScore());
+    }
+    
+    @Test
+    public void TD1SH3ScorePoint() {
+        tennisGame.wonPoint(SHARAPOVA);
+        tennisGame.wonPoint(SHARAPOVA);
+        tennisGame.wonPoint(SHARAPOVA);
+        tennisGame.wonPoint(TENDUKLAR);
+        assertEquals("Fifteen-Forty", tennisGame.getScore());
+    }
+    
     
 }
