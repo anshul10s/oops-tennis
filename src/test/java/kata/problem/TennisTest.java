@@ -1,85 +1,79 @@
 package kata.problem;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
- * Level2:
+ * Level 3:
  * 
- * Implement more scores now
+ * Implementing the concept of Love & Deuce
  * @author anshul.gupta
  *
  */
+@RunWith(Parameterized.class)
 public class TennisTest {
 
     private static final String TENDUKLAR = "Tenduklar";
     private static final String SHARAPOVA = "Sharapova";
-    private TennisGame tennisGame;
     
-    @Before
-    public void setup() {
-        tennisGame = new TennisGameImpl(TENDUKLAR, SHARAPOVA);
+    private int tendulkarScore;
+    private int sharapova2Score;
+    private String expectedScore;
+
+    public TennisTest(int player1Score, int player2Score, String expectedScore) {
+        this.tendulkarScore = player1Score;
+        this.sharapova2Score = player2Score;
+        this.expectedScore = expectedScore;
     }
     
-    @Test
-    public void SHscorePoint() {
-        tennisGame.wonPoint(SHARAPOVA);
-        assertEquals("Love-Fifteen", tennisGame.getScore());
+    @Parameters
+    public static Collection<Object[]> getAllScores() {
+        return Arrays.asList(new Object[][] {
+                { 0, 0, "Love-All" },
+                { 1, 1, "Fifteen-All" },
+                { 2, 2, "Thirty-All"},
+                { 3, 3, "Deuce"},
+                { 4, 4, "Deuce"},
+                
+                { 1, 0, "Fifteen-Love"},
+                { 0, 1, "Love-Fifteen"},
+                { 2, 0, "Thirty-Love"},
+                { 0, 2, "Love-Thirty"},
+                { 3, 0, "Forty-Love"},
+                { 0, 3, "Love-Forty"},
+                
+                { 2, 1, "Thirty-Fifteen"},
+                { 1, 2, "Fifteen-Thirty"},
+                { 3, 1, "Forty-Fifteen"},
+                { 1, 3, "Fifteen-Forty"},
+
+                { 3, 2, "Forty-Thirty"},
+                { 2, 3, "Thirty-Forty"},
+                
+        });
     }
-    
-    @Test
-    public void TDScorePoint() {
-        tennisGame.wonPoint(TENDUKLAR);
-        assertEquals("Fifteen-Love", tennisGame.getScore());
+
+    public void checkAllScores(TennisGame game) {
+        int highestScore = Math.max(this.tendulkarScore, this.sharapova2Score);
+        for (int i = 0; i < highestScore; i++) {
+            if (i < this.tendulkarScore)
+                game.wonPoint(TENDUKLAR);
+            if (i < this.sharapova2Score)
+                game.wonPoint(SHARAPOVA);
+        }
+        assertEquals(this.expectedScore, game.getScore());
     }
-    
+
     @Test
-    public void TD1SH2ScorePoint() {
-        tennisGame.wonPoint(SHARAPOVA);
-        tennisGame.wonPoint(SHARAPOVA);
-        tennisGame.wonPoint(TENDUKLAR);
-        assertEquals("Fifteen-Thirty", tennisGame.getScore());
-    }
-    
-    @Test
-    public void TD2SH1corePoint() {
-        tennisGame.wonPoint(TENDUKLAR);
-        tennisGame.wonPoint(TENDUKLAR);
-        tennisGame.wonPoint(SHARAPOVA);
-        assertEquals("Thirty-Fifteen", tennisGame.getScore());
-    }
-    
-    @Test
-    public void TD2SH0ScorePoint() {
-        tennisGame.wonPoint(TENDUKLAR);
-        tennisGame.wonPoint(TENDUKLAR);
-        assertEquals("Thirty-Love", tennisGame.getScore());
-    }
-    
-    @Test
-    public void TD0SH2ScorePoint() {
-        tennisGame.wonPoint(SHARAPOVA);
-        tennisGame.wonPoint(SHARAPOVA);
-        assertEquals("Love-Thirty", tennisGame.getScore());
-    }
-    
-    @Test
-    public void TD3SH1ScorePoint() {
-        tennisGame.wonPoint(TENDUKLAR);
-        tennisGame.wonPoint(TENDUKLAR);
-        tennisGame.wonPoint(TENDUKLAR);
-        tennisGame.wonPoint(SHARAPOVA);
-        assertEquals("Forty-Fifteen", tennisGame.getScore());
-    }
-    
-    @Test
-    public void TD1SH3ScorePoint() {
-        tennisGame.wonPoint(SHARAPOVA);
-        tennisGame.wonPoint(SHARAPOVA);
-        tennisGame.wonPoint(SHARAPOVA);
-        tennisGame.wonPoint(TENDUKLAR);
-        assertEquals("Fifteen-Forty", tennisGame.getScore());
+    public void checkAllScoresTennisGame1() {
+        TennisGameImpl game = new TennisGameImpl(TENDUKLAR, SHARAPOVA);
+        checkAllScores(game);
     }
     
     
