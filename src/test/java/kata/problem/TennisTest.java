@@ -3,10 +3,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
-@RunWith(Parameterized.class)
 public class TennisTest {
 
     private static final String TENDUKLAR = "Tenduklar";
@@ -15,26 +12,34 @@ public class TennisTest {
     
     @Before
     public void setup() {
-        tennisGame = new TennisGameImpl();
+        tennisGame = new TennisGameImpl(SHARAPOVA, TENDUKLAR);
     }
     
     @Test
-    public void gameStarted() {
-        assertEquals("Love-all", tennisGame.getScore());
-    }
-    
-    @Test
-    public void serapovaScorePoint() {
+    public void SHscorePoint() {
         tennisGame.wonPoint(SHARAPOVA);
         assertEquals("Fifteen-Love", tennisGame.getScore());
     }
     
     @Test
-    public void bothScoreOnePoint() {
-        tennisGame.wonPoint(SHARAPOVA);
+    public void TDScorePoint() {
         tennisGame.wonPoint(TENDUKLAR);
-        assertEquals("Fifteen-all", tennisGame.getScore());
+        assertEquals("Love-Fifteen", tennisGame.getScore());
     }
+    
+    @Test
+    public void TD1SH2ScorePoint() {
+        tennisGame.wonPoint(TENDUKLAR);
+        assertEquals("Fifteen-Thirty", tennisGame.getScore());
+    }
+    
+    @Test
+    public void TD2SH1corePoint() {
+        tennisGame.wonPoint(TENDUKLAR);
+        assertEquals("Thirty-Fifteen", tennisGame.getScore());
+    }
+    
+    
 
 
 }
