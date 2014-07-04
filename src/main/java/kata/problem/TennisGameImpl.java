@@ -23,15 +23,22 @@ public class TennisGameImpl implements TennisGame {
     }
 
     public String getScore() {
-        if (score1 == 1 && score2 == 0)
-            return "Fifteen-Love";
-        else if (score1 == 0 && score2 == 1)
-            return "Love-Fifteen";
-        else if (score1 == 1 && score2 == 2)
-            return "Fifteen-Thirty";
-        else if (score1 == 2 && score2 == 1)
-            return "Thirty-Fifteen";
-        return null;
+        return scoreDisplayValue(score1)+"-"+scoreDisplayValue(score2);
+    }
+    
+    public String scoreDisplayValue(int score) {
+        switch (score) {
+        case 0:
+            return "Love";
+        case 1:
+            return "Fifteen";
+        case 2:
+            return "Thirty";
+        case 3:
+            return "Forty";
+        default:
+            return null;
+        }
     }
 
 }
