@@ -10,9 +10,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
- * Level 3:
+ * Level 4:
  * 
- * Implementing the concept of Love & Deuce
+ * Implementing advantage and winning
  * @author anshul.gupta
  *
  */
@@ -26,9 +26,9 @@ public class TennisTest {
     private int sharapova2Score;
     private String expectedScore;
 
-    public TennisTest(int player1Score, int player2Score, String expectedScore) {
-        this.tendulkarScore = player1Score;
-        this.sharapova2Score = player2Score;
+    public TennisTest(int TenduklarScore, int SharapovaScore, String expectedScore) {
+        this.tendulkarScore = TenduklarScore;
+        this.sharapova2Score = SharapovaScore;
         this.expectedScore = expectedScore;
     }
     
@@ -47,14 +47,32 @@ public class TennisTest {
                 { 0, 2, "Love-Thirty"},
                 { 3, 0, "Forty-Love"},
                 { 0, 3, "Love-Forty"},
+                { 4, 0, "Win for Tenduklar"},
+                { 0, 4, "Win for Sharapova"},
                 
                 { 2, 1, "Thirty-Fifteen"},
                 { 1, 2, "Fifteen-Thirty"},
                 { 3, 1, "Forty-Fifteen"},
                 { 1, 3, "Fifteen-Forty"},
+                { 4, 1, "Win for Tenduklar"},
+                { 1, 4, "Win for Sharapova"},
 
                 { 3, 2, "Forty-Thirty"},
                 { 2, 3, "Thirty-Forty"},
+                { 4, 2, "Win for Tenduklar"},
+                { 2, 4, "Win for Sharapova"},
+                
+                { 4, 3, "Advantage Tenduklar"},
+                { 3, 4, "Advantage Sharapova"},
+                { 5, 4, "Advantage Tenduklar"},
+                { 4, 5, "Advantage Sharapova"},
+                { 15, 14, "Advantage Tenduklar"},
+                { 14, 15, "Advantage Sharapova"},
+
+                { 6, 4, "Win for Tenduklar"},
+                { 4, 6, "Win for Sharapova"},
+                { 16, 14, "Win for Tenduklar"},
+                { 14, 16, "Win for Sharapova"},
                 
         });
     }
